@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.santepriceindex.databinding.FragmentPriceWatchBinding
-import com.google.firebase.database.*
 
 class PriceWatchFragment : Fragment() {
 
@@ -27,8 +26,6 @@ class PriceWatchFragment : Fragment() {
         _binding = FragmentPriceWatchBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        database = FirebaseDatabase.getInstance().reference.child("prices")
-
         recyclerView = binding.recyclerViewPrices
         recyclerView.layoutManager = LinearLayoutManager(context)
         adapter = PriceAdapter()
@@ -40,6 +37,18 @@ class PriceWatchFragment : Fragment() {
     }
 
     private fun loadPrices() {
+        // Mock data for demonstration
+        val mockPrices = listOf(
+            PriceItem("Onion", 25.0, "kg"),
+            PriceItem("Tomato", 35.0, "kg"),
+            PriceItem("Potato", 20.0, "kg"),
+            PriceItem("Rice", 45.0, "kg"),
+            PriceItem("Wheat", 30.0, "kg")
+        )
+        adapter.setPrices(mockPrices)
+
+        // Uncomment below for Firebase integration
+        /*
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val prices = mutableListOf<PriceItem>()
@@ -48,6 +57,12 @@ class PriceWatchFragment : Fragment() {
                     priceItem?.let { prices.add(it) }
                 }
                 adapter.setPrices(prices)
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+        })
+        */
+    }
             }
 
             override fun onCancelled(error: DatabaseError) {
