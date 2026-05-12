@@ -16,7 +16,6 @@ class ProfitCalcFragment : Fragment() {
     private var _binding: FragmentProfitCalcBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var database: DatabaseReference
     private var prices: List<PriceItem> = listOf()
     private var selectedItem: PriceItem? = null
 
@@ -28,8 +27,6 @@ class ProfitCalcFragment : Fragment() {
         _binding = FragmentProfitCalcBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        database = FirebaseDatabase.getInstance().reference.child("prices")
-
         loadPrices()
 
         binding.buttonCalculate.setOnClickListener {
@@ -40,6 +37,32 @@ class ProfitCalcFragment : Fragment() {
     }
 
     private fun loadPrices() {
+        // Mock data for demonstration
+        prices = listOf(
+            PriceItem("Onion", 25.0, "kg"),
+            PriceItem("Tomato", 35.0, "kg"),
+            PriceItem("Potato", 20.0, "kg"),
+            PriceItem("Rice", 45.0, "kg"),
+            PriceItem("Wheat", 30.0, "kg")
+        )
+
+        val itemNames = prices.map { it.name }
+
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, itemNames)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerItems.adapter = adapter
+
+        binding.spinnerItems.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                selectedItem = prices[position]
+                binding.textViewMandiPrice.text = "${selectedItem?.mandiPrice ?: 0.0}"
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+        // Uncomment below for Firebase integration
+        /*
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 prices = mutableListOf()
@@ -68,6 +91,7 @@ class ProfitCalcFragment : Fragment() {
 
             override fun onCancelled(error: DatabaseError) {}
         })
+        */
     }
 
     private fun calculateRecommendedPrice() {
