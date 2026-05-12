@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Sante-Price Index</string>
+    <string name="price_watch">Price Watch</string>
+    <string name="profit_calc">Profit Calculator</string>
+    <string name="price_board">Price Board</string>
+    <string name="trends">Trends</string>
+    <string name="enter_transport_cost">Enter Transport Cost (₹)</string>
+    <string name="calculate">Calculate</string>
+    <string name="recommended_price">Recommended Selling Price: ₹</string>
+    <string name="onion">Onion</string>
+    <string name="tomato">Tomato</string>
+    <string name="potato">Potato</string>
+    <string name="rice">Rice</string>
+    <string name="wheat">Wheat</string>
+    <string name="trending_up">Prices likely to rise</string>
+    <string name="trending_down">Prices likely to fall</string>
+    <string name="stable">Prices stable</string>
+</resources>
