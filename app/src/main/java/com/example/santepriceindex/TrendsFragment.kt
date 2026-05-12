@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.santepriceindex.databinding.FragmentTrendsBinding
-import com.google.firebase.database.*
 import kotlin.random.Random
 
 class TrendsFragment : Fragment() {
@@ -27,8 +26,6 @@ class TrendsFragment : Fragment() {
     ): View {
         _binding = FragmentTrendsBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        database = FirebaseDatabase.getInstance().reference.child("prices")
 
         recyclerView = binding.recyclerViewTrends
         recyclerView.layoutManager = LinearLayoutManager(context)
