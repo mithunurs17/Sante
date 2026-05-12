@@ -26,8 +26,6 @@ class PriceBoardFragment : Fragment() {
         _binding = FragmentPriceBoardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        database = FirebaseDatabase.getInstance().reference.child("prices")
-
         recyclerView = binding.recyclerViewPriceBoard
         recyclerView.layoutManager = LinearLayoutManager(context)
         adapter = PriceBoardAdapter()

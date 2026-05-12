@@ -41,6 +41,27 @@ class TrendsFragment : Fragment() {
     }
 
     private fun loadTrends() {
+        // Mock data for demonstration
+        val mockPrices = listOf(
+            PriceItem("Onion", 25.0, "kg"),
+            PriceItem("Tomato", 35.0, "kg"),
+            PriceItem("Potato", 20.0, "kg"),
+            PriceItem("Rice", 45.0, "kg"),
+            PriceItem("Wheat", 30.0, "kg")
+        )
+
+        val trends = mockPrices.map {
+            val trend = when (Random.nextInt(3)) {
+                0 -> "Rising"
+                1 -> "Falling"
+                else -> "Stable"
+            }
+            TrendItem(it.name, trend)
+        }
+        adapter.setTrends(trends)
+
+        // Uncomment below for Firebase integration
+        /*
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val trends = mutableListOf<TrendItem>()
@@ -60,6 +81,7 @@ class TrendsFragment : Fragment() {
 
             override fun onCancelled(error: DatabaseError) {}
         })
+        */
     }
 
     override fun onDestroyView() {
